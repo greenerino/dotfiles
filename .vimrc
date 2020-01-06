@@ -21,6 +21,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } "CoC extensions are managed through CoC itself
 
@@ -44,7 +45,7 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "fzf
-nmap <C-p> :Files<CR>
+nmap <C-p> :GitFiles<CR>
 
 "Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
@@ -52,7 +53,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "Non-plugin stuff
 set number relativenumber
 autocmd InsertEnter,InsertLeave * set cul!
-set foldmethod=indent
+setlocal foldmethod=syntax
 set nofoldenable
 
 "ctrl v - tab to insert normal tab
@@ -63,6 +64,9 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+"Ctrl-\ to split
+map <C-\> :vsplit<CR>
 
 "The rest of this is from CoC readme
 " if hidden is not set, TextEdit might fail.
