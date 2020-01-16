@@ -16,15 +16,17 @@
 "" Plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'jiangmiao/auto-pairs'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' } "CoC extensions are managed through CoC itself
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } "Color Theme
+Plug 'sheerun/vim-polyglot' "Syntax Highlighting for many languages
+Plug 'scrooloose/nerdtree' "File System Navigation
+Plug 'Xuyuanp/nerdtree-git-plugin' "Git icons for nerdtree
+Plug 'airblade/vim-gitgutter' "Shows changed lines for git
+Plug 'tpope/vim-fugitive' "Installed for merge conflict resolutions
+Plug 'jiangmiao/auto-pairs' "Pair quotes, parens, brackets, etc
+Plug 'neoclide/coc.nvim', { 'branch': 'release' } "Intellisense
+"CoC extensions are managed through CoC itself
 
+"fuzzy find
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 
@@ -49,6 +51,9 @@ nmap <C-p> :GitFiles<CR>
 
 "Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+"Polyglot Vue slowness fix
+let g:vue_pre_processors = 'detect_on_enter'
 
 "Non-plugin stuff
 set number relativenumber
