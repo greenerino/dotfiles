@@ -14,6 +14,9 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } "Color Theme
 Plug 'sheerun/vim-polyglot' "Syntax Highlighting for many languages
 Plug 'scrooloose/nerdtree' "File System Navigation
 Plug 'Xuyuanp/nerdtree-git-plugin' "Git icons for nerdtree
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "highlight file names based on extension
+"syntax highlight will want to be paired with ryanoasis/vim-devicons once a
+"font is installed
 Plug 'airblade/vim-gitgutter' "Shows changed lines for git
 Plug 'tpope/vim-fugitive' "Installed for merge conflict resolutions
 Plug 'jiangmiao/auto-pairs' "Pair quotes, parens, brackets, etc
@@ -40,6 +43,14 @@ map <C-n> :NERDTreeToggle<CR>
 "open nerd tree if vim is opened without arguments
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"nerdtree highlight
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeExtensionHighlightColor = {}
+let g:NERDTreeExtensionHighlightColor['vue'] = "31B53E"
+let g:NERDTreeExtensionHighlightColor['go'] = "43BAF9"
 
 "fzf
 nmap <C-p> :GitFiles<CR>
