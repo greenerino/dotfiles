@@ -58,7 +58,7 @@ let g:vue_pre_processors = 'detect_on_enter'
 
 "NERDCommenter
 "Bind toggle to ctrl-/
-map <C-_> <leader>c<space>
+map <C-_> <plug>NERDCommenterToggle
 
 "Add space before comments
 let g:NERDSpaceDelims = 1
