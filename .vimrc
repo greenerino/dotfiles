@@ -23,6 +23,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin' "Git icons for nerdtree
 Plug 'airblade/vim-gitgutter' "Shows changed lines for git
 Plug 'tpope/vim-fugitive' "Installed for merge conflict resolutions
 Plug 'jiangmiao/auto-pairs' "Pair quotes, parens, brackets, etc
+Plug 'preservim/nerdcommenter' "Comment hotkey
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } "Intellisense
 "CoC extensions are managed through CoC itself
 
@@ -54,6 +55,34 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "Polyglot Vue slowness fix
 let g:vue_pre_processors = 'detect_on_enter'
+
+"NERDCommenter
+"Bind toggle to ctrl-/
+map <C-_> <leader>c<space>
+
+"Add space before comments
+let g:NERDSpaceDelims = 1
+
+"Add hooks for Vue files
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
 
 "Non-plugin stuff
 set number relativenumber
