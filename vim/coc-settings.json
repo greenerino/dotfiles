@@ -1,0 +1,8 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "vue"
+  ],
+  "prettier.disableLanguages": [],
+  "prettier.eslintIntegration": true
+}

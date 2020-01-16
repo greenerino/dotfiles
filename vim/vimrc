@@ -1,16 +1,10 @@
 "TODO:
-"prettier
-"snippets
-"commenter - maybe just compromise and js comments for vue
 "make insert/normal mode and which line you're on more obvious
 "
 "address accidental scrolling while typing - tried disabling scrolling while
 "typing, but it didn't work at all. Seems to be a problem with gnome-terminal,
 "and/or the scroll 'button' isn't sending the signal I think it is
 "
-"language library is slow.
-"
-"fzf should ignore node_modules
 
 
 "" Plugins
@@ -34,7 +28,7 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 "Plugin related options
-"
+
 "
 colorscheme challenger_deep
 if has('nvim') || has('termguicolors')
