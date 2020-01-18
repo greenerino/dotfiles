@@ -18,6 +18,7 @@ alias ls='ls --color=auto -p'
 alias cal='cal -3'
 alias rm='rm -v'
 alias grep="grep --color=auto"
+alias df="df -H"
 
 PS1='[\u@\h \W]\$ '
 
@@ -27,5 +28,5 @@ alias paclist="pacman -Qi | awk '/^Name/{name=\$3} /^Installed Size/{print \$4\$
 #nvm
 source /usr/share/nvm/init-nvm.sh
 
-#'change directory to project', used for navigating to a frequently used directory
-alias cdp='cd /home/justin/Documents/Maxset/'
+#bashmarks
+source ~/.local/bin/bashmarks.sh
