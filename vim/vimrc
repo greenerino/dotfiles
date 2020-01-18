@@ -5,13 +5,15 @@
 "typing, but it didn't work at all. Seems to be a problem with gnome-terminal,
 "and/or the scroll 'button' isn't sending the signal I think it is
 "
+"theme's highlight colors should be flipped imo. 
+"
+"open definitions in new split (coc gd, https://vi.stackexchange.com/questions/21774/open-coc-definition-in-new-split-in-coc)
 
 
 "" Plugins
 call plug#begin('~/.vim/plugged')
 
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } "Color Theme
-Plug 'sheerun/vim-polyglot' "Syntax Highlighting for many languages
 Plug 'scrooloose/nerdtree' "File System Navigation
 Plug 'Xuyuanp/nerdtree-git-plugin' "Git icons for nerdtree
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "highlight file names based on extension
@@ -21,6 +23,8 @@ Plug 'airblade/vim-gitgutter' "Shows changed lines for git
 Plug 'tpope/vim-fugitive' "Installed for merge conflict resolutions
 Plug 'jiangmiao/auto-pairs' "Pair quotes, parens, brackets, etc
 Plug 'preservim/nerdcommenter' "Comment hotkey
+
+Plug 'sheerun/vim-polyglot' "Syntax Highlighting for many languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } "Intellisense
 "CoC extensions are managed through CoC itself
 
@@ -32,7 +36,6 @@ call plug#end()
 
 "Plugin related options
 
-"
 colorscheme challenger_deep
 if has('nvim') || has('termguicolors')
   set termguicolors
@@ -90,10 +93,11 @@ function! NERDCommenter_after()
 endfunction
 
 "Non-plugin stuff
-set number relativenumber
-autocmd InsertEnter,InsertLeave * set cul!
+set number relativenumber "Relative line numbers
+autocmd InsertEnter,InsertLeave * set cul! "Highlight row while in insert mode
 setlocal foldmethod=syntax
-set nofoldenable
+set nofoldenable "Start with all folds unfolded
+set hlsearch "Use :noh to turn off highlighting after a search
 
 "ctrl v - tab to insert normal tab
 set tabstop=2 expandtab shiftwidth=2 smarttab
@@ -106,6 +110,9 @@ map <C-l> <C-w>l
 
 "Ctrl-\ to split
 map <C-\> :vsplit<CR>
+
+"coc-go import
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 "The rest of this is from CoC readme
 " if hidden is not set, TextEdit might fail.
