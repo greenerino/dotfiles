@@ -33,7 +33,7 @@ exitStatusColor()
   fi
 }
 CLEARCOLOR="\[\033[00m\]"
-PS1='\[`exitStatusColor`\]'"[\t] [\u@\h]\$$CLEARCOLOR "
+PS1='\[`exitStatusColor`\]'"[\t] [\u@\h \W]\$$CLEARCOLOR "
 
 #list of packages in reverse size order
 alias paclist="pacman -Qi | awk '/^Name/{name=\$3} /^Installed Size/{print \$4\$5 name}' | sort -h"
