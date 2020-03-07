@@ -7,7 +7,7 @@
 "
 "theme's highlight colors should be flipped imo. 
 "
-"open definitions in new split (coc gd, https://vi.stackexchange.com/questions/21774/open-coc-definition-in-new-split-in-coc)
+"window swapping plugin https://github.com/wesQ3/vim-windowswap
 
 
 "" Plugins
@@ -16,14 +16,18 @@ call plug#begin('~/.vim/plugged')
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } "Color Theme
 Plug 'scrooloose/nerdtree' "File System Navigation
 Plug 'Xuyuanp/nerdtree-git-plugin' "Git icons for nerdtree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "highlight file names based on extension
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "color file names based on extension
 "syntax highlight will want to be paired with ryanoasis/vim-devicons once a
 "font is installed
 Plug 'airblade/vim-gitgutter' "Shows changed lines for git
 Plug 'tpope/vim-fugitive' "Installed for merge conflict resolutions
 Plug 'jiangmiao/auto-pairs' "Pair quotes, parens, brackets, etc
 Plug 'preservim/nerdcommenter' "Comment hotkey
+Plug 'honza/vim-snippets' "Snippets to be used in coc-snippets
 
+Plug 'fatih/vim-go' "Syntax and helpers for go. Polyglot only brings in syntax
+"Errors may occur if polyglot is not installed after vim-go
+"https://github.com/sheerun/vim-polyglot/issues/357
 Plug 'sheerun/vim-polyglot' "Syntax Highlighting for many languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } "Intellisense
 "CoC extensions are managed through CoC itself
@@ -43,6 +47,7 @@ endif
 
 "Nerd tree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 "open nerd tree if vim is opened without arguments
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -64,9 +69,14 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "Polyglot Vue slowness fix
 let g:vue_pre_processors = 'detect_on_enter'
 
+"Polyglot disable Go due to installing it on its own
+let g:polyglot_disabled = ['go']
+
 "NERDCommenter
 "Bind toggle to ctrl-/
 map <C-_> <plug>NERDCommenterToggle
+"Ctrl-Space for block comments
+map <C-@> <plug>NERDCommenterSexy
 
 "Add space before comments
 let g:NERDSpaceDelims = 1
@@ -92,12 +102,19 @@ function! NERDCommenter_after()
   endif
 endfunction
 
+"vim-go
+"GoTest command
+autocmd FileType go nmap <S-T> <Plug>(go-test)
+"Import and format on save
+let g:go_fmt_command = "goimports"
+
 "Non-plugin stuff
 set number relativenumber "Relative line numbers
 autocmd InsertEnter,InsertLeave * set cul! "Highlight row while in insert mode
 setlocal foldmethod=syntax
-set nofoldenable "Start with all folds unfolded
-set hlsearch "Use :noh to turn off highlighting after a search
+set foldlevel=99 "Start with all folds unfolded
+set hlsearch "Highlight all results. Use :noh to turn off highlighting after a search
+set colorcolumn=80 "Mark the 80th column (v7.3+)
 
 "ctrl v - tab to insert normal tab
 set tabstop=2 expandtab shiftwidth=2 smarttab
@@ -111,8 +128,8 @@ map <C-l> <C-w>l
 "Ctrl-\ to split
 map <C-\> :vsplit<CR>
 
-"coc-go import
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+noremap + :vertical resize +5<CR>
+noremap _ :vertical resize -5<CR>
 
 "The rest of this is from CoC readme
 " if hidden is not set, TextEdit might fail.
