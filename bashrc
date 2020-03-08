@@ -19,6 +19,7 @@ alias lsa='ls --color=auto -p -a'
 alias cal='cal -3'
 alias rm='rm -v'
 alias mv="mv -v -i"
+alias cp="cp -v -i"
 alias grep="grep --color=auto"
 alias df="df -H"
 
